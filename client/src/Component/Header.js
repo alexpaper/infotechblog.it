@@ -30,6 +30,34 @@ function Header(props) {
     setSearch("");
   };
 
+  //*** HIDE HEADE ON SCROLL  DOWN  */
+  let lastScrollTop = 0;
+  let headerToHide = React.useRef();
+  // console.log(headerToHide.current)
+  // Add event listener
+  let prevScrollpos = window.pageYOffset;
+
+  window.addEventListener('scroll', function () {
+    // console.log(window.pageYOffset)
+    var currentScrollPos = window.pageYOffset;
+    if (prevScrollpos > currentScrollPos) {
+      // headerToHide.current.classList.remove('d-none')
+      headerToHide.current.style.opacity = 1;
+      setTimeout(() => {
+        headerToHide.current.style.display = 'block';
+      }, 1800)
+    } else {
+      // headerToHide.current.classList.add('d-none')
+      headerToHide.current.style.opacity = 0;
+      setTimeout(() => {
+        headerToHide.current.style.display = 'none';
+      }, 1800)
+
+    }
+    // console.log(prevScrollpos)
+    prevScrollpos = currentScrollPos;
+  });
+
   //**** Styles
   // const { classes } = props;
 
@@ -47,7 +75,7 @@ function Header(props) {
       <div className="content-stcky">
         <div className="sticky">
           {/* HEADER  */}
-          <header
+          <header ref={headerToHide}
             className={!open ? "info-header" : "info-header back-white-color"}
           >
             <div className="contentHeader">
@@ -79,7 +107,7 @@ function Header(props) {
           <div className="info-search">
             <div className="info-home">
               <a href="/">
-                <img src="img/home.png" className="btn-home" alt="home" />
+                <img src="img/casa.svg" className="btn-home" alt="home" />
               </a>
             </div>
             <form className="search-form" onSubmit={onSearchSubmit}>
@@ -104,8 +132,7 @@ function Header(props) {
             +
           </button>
 
-
-          <div className="info-msg">{typeof contextUsers.state.msg != "undefined" ? contextUsers.state.msg : ""}</div>
+          <div className={contextUsers.state.msg.length === 0 ? "info-msg" : "info-msg bck"}>{typeof contextUsers.state.msg != "undefined" ? contextUsers.state.msg : ""}</div>
         </div>
       </div>
     </>

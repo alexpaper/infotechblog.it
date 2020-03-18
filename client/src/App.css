@@ -150,13 +150,20 @@ img.img-show.show-btn {
 }
 
 header.info-header {
+  display: block;
+  opacity: 1;
+  width: 100%;
+  top: 0;
   max-width: 100%;
   width: 100%;
-  padding-bottom: 5px;
+  height: 120px;
   background-color: var(--t-color);
   color: #ffffff;
   text-align: center;
-  transition: 0.6s ease-in-out;
+  transition: 1.8s ease-in-out;
+}
+.d-none{
+  visibility: hidden;
 }
 
 .info-title {
@@ -172,7 +179,7 @@ header.info-header {
 }
 
 div.info-subtitle {
-  padding: 10px;
+  padding: 4px;
 }
 
 .switch {
@@ -263,7 +270,7 @@ button:hover {
 }
 
 div.contentHeader {
-  padding: 10px;
+  padding: 5px;
   max-width: 100%;
   width: 520px;
   margin: 0 auto;
@@ -273,7 +280,7 @@ div.contentHeader {
 div.content {
   padding: 10px;
   max-width: 100%;
-  width: 700px;
+  width: 720px;
   margin: 0 auto;
   transition: 0.6s ease-in-out;
 }
@@ -292,13 +299,13 @@ div.content {
   top: 0;
   background-color: #ffffff;
   box-shadow: 0px 1px 0px var(--t-color);
-  width: 100vw;
+  width: 100%;
   text-align: center;
   z-index: 1;
 }
 
 section {
-  margin-top: 20rem;
+  margin-top: 14rem;
 }
 
 div.info-modal-window {
@@ -599,9 +606,13 @@ transition: 0.6s ease-in-out;
 
 .btn-home {
   /* color:#AADC6E; */
+  margin-top: 4px;
   cursor: pointer;
-  width: 70px;
+  width: 16px;
   transition: 0.6s ease-in-out;
+}
+.btn-home:active{
+  transform: scale(0.9);
 }
 
 .btn-home:hover {
@@ -609,8 +620,10 @@ transition: 0.6s ease-in-out;
 }
 
 .info-btn-add {
-  font-size: 1.6rem;
-  padding: 0 4px;
+  color:var(--primary-color);
+  font-size: 1.4rem;
+  padding: 0 6px;
+  background-color: #ffffff;
 }
 
 .info-btn-add:hover {
@@ -618,13 +631,20 @@ transition: 0.6s ease-in-out;
 }
 
 .info-msg {
-  color:hotpink;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
   font-size: 1.2rem;
-  padding: 4px;
-  margin: 4px;
-  height: 40px;
+  padding: 3px;
+  height: 38px;
   width: 400px;
-  margin: 8px auto;
+  margin: 3px auto;
+}
+.bck{
+  display: block;
+  background-color: rgb(4, 136, 4);;
+  border-radius: 20px;
 }
 
 .img-min {
