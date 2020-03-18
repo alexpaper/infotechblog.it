@@ -8,7 +8,7 @@ You need also to change the proxy ip address inside the package.json in react cl
 ```
 "proxy": "http://your.ip.address",
 ```
-and also, inside the routes nodejs directory, in index.js, this line with your ip address:
+and also, inside the routes nodejs directory, in index.js, this lines with your ip address:
 ```
 await upload(req, res, (err) => {
     let url = '';
