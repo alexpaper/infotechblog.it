@@ -3,12 +3,12 @@
 >Info tech blog posts application.
 
 ## Usage 
-Rename 'env.env' to '.env', fill the fields with your own data, in particular only the mongodb string connection field 'MONGO_URI='.
-You need to change the ip address inside the package.json react client directory, for the image upload.
+Rename 'env.env' to '.env', fill the fields with your own data, in particular only the mongodb string connection field 'MONGO_URI= your-db-string-connection'.
+You need also to change the proxy ip address inside the package.json in react client directory, for the image upload. After changed, you need to redo the build (npm run build) and place the files inside the 'reactApp/build1' folder.
 ```
 "proxy": "http://your.ip.address",
 ```
-and, inside the routes node directory, inside index.js, this line with your ip address:
+and also, inside the routes nodejs directory, in index.js, this line with your ip address:
 ```
 await upload(req, res, (err) => {
     let url = '';
@@ -32,6 +32,11 @@ npm i --verbose
 node app.js
 
 ```
+if you use pm2
+```
+pm2 start app.js
+```
+
 
 ## Version 1.3.0
 
