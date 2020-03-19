@@ -2,6 +2,9 @@
 
 >Info tech blog posts application.
 
+![](/public/img/infoblog.gif)
+
+
 ## Usage 
 Rename 'env.env' to '.env', fill the fields with your own data, in particular only the mongodb string connection field 'MONGO_URI= your-db-string-connection'.
 You need also to change the proxy ip address inside the package.json in react client directory, for the image upload. After changed, you need to redo the build (npm run build) and place the files inside the 'reactApp/build1' folder.
