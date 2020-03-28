@@ -164,7 +164,11 @@ router.post('/register', async (req, res, next) => {
 
 //*********************** LOGIN POST */
 router.post('/login', passport.authenticate('local'), function (req, res) {
-    return res.status(200).json({ success: true });
+    if(req.user){
+        return res.status(200).json({ success: true });        
+    }
+    return res.status(400).json({ success: false });
+
 });
 
 //*********************** LOG OUT  */
@@ -178,10 +182,15 @@ router.get('/logout', (req, res) => {
 
 //************************* FETCH LOGGEIN USER */
 router.get('/whoisloggedin', (req, res) => {
-    if (req.isAuthenticated()) {
+    // console.log()
+    // if(req.user !== undefined){
+    // console.log(req.user.username);
+    // }
+    
+    if (req.user !== undefined && req.isAuthenticated() === true) {
         return res.status(200).json({ isAuthenticated: true, data: req.user });
     }
-    res.status(400).json({ isAuthenticated: false, data: {} });
+    return res.status(400).json({ isAuthenticated: false, data: {} });
 });
 
 // Export

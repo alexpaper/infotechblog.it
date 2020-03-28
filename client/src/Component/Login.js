@@ -37,10 +37,10 @@ function Login(props) {
         setPassword({ message: '' });
         // Close modal windows
         openModalLogin();
-        // Flash message
-        contextUsers.flashMessage(`👌 Login success.`)
         // Fetch from context who is logged data
         contextUsers.whoIsLogged()
+         // Flash message
+         contextUsers.flashMessage(`👌 Login success.`)
       })
       .catch(error => {
         if (error.response) {

@@ -64,6 +64,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 // passport.serializeUser(User.serializeUser());
 // passport.deserializeUser(User.deserializeUser());
 passport.serializeUser(function (user, done) {
+  // console.log(user)
   done(null, user.id);
 });
 
@@ -74,12 +75,12 @@ passport.deserializeUser(function (id, done) {
 });
 
 app.use((req, res, next) => {
-  // console.log('req.session', req.session);
+  //  console.log('req.session', req.session);
   return next();
 });
 // Passport Create req.user
 app.use(function (req, res, next) {
-  res.locals.user = req.user || null;
+  res.locals.user = req.user;
   // console.log(req.user);
   //*************** NEXT */
   next();
@@ -121,6 +122,6 @@ let PORT = process.env.PORT;
 
 // Listener
 const server = app.listen(PORT, () => {
-  console.log(`${cat()}`.bgMagenta);
-  console.log(`Server running on port ${PORT}`.bgGreen.bold);
+  console.log(`${cat()}`);
+  console.log(`Server running on port ${PORT}`.blue);
 });
