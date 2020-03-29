@@ -32,7 +32,7 @@ export const GlobalUsersProvider = ({ children }) => {
     await axios
       .get(url)
       .then(response => {
-        // console.log(response);
+         console.log(response);
         if (response.data.isAuthenticated === true) {
           dispatch({
             type: 'FETCH_USER_SUCCESS',

@@ -181,16 +181,10 @@ router.get('/logout', (req, res) => {
 });
 
 //************************* FETCH LOGGEIN USER */
-router.get('/whoisloggedin', (req, res) => {
-    // console.log()
-    // if(req.user !== undefined){
-    // console.log(req.user.username);
-    // }
+router.get('/whoisloggedin', isLogged, (req, res) => {
+
+        return  res.status(200).json({ isAuthenticated: true, data: req.user });
     
-    if (req.user !== undefined && req.isAuthenticated() === true) {
-        return res.status(200).json({ isAuthenticated: true, data: req.user });
-    }
-    return res.status(400).json({ isAuthenticated: false, data: {} });
 });
 
 // Export
