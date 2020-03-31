@@ -182,7 +182,7 @@ router.get('/logout', (req, res) => {
 
 //************************* FETCH LOGGEIN USER */
 router.get('/whoisloggedin', isLogged, (req, res) => {
-
+    
         return  res.status(200).json({ isAuthenticated: true, data: req.user });
     
 });

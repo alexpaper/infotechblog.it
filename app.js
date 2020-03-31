@@ -44,9 +44,6 @@ app.use(limiter);
 app.use(cors());
 
 //*** AUTHENTICATION */
-const cookieExpirationDate = new Date();
-const cookieExpirationDays = 1;
-cookieExpirationDate.setDate(cookieExpirationDate.getDate() + cookieExpirationDays);
 // Cookie parser
 app.use(cookieParser('Please, make me strong, give me the power to destroy enemies!'));
 app.use(session({
@@ -55,7 +52,7 @@ app.use(session({
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
-    expires: cookieExpirationDate // use expires instead of maxAge
+    maxAge: 3600000 // one hour
   }
 }));
 app.use(passport.initialize());
@@ -75,15 +72,16 @@ passport.deserializeUser(function (id, done) {
 });
 
 app.use((req, res, next) => {
-  //  console.log('req.session', req.session);
+     // console.log('req.session', req.session);
   return next();
 });
 // Passport Create req.user
 app.use(function (req, res, next) {
   res.locals.user = req.user;
+  res.locals.session = req.session;
   // console.log(req.user);
   //*************** NEXT */
-  next();
+ return next();
 });
 
 //*** MIDDLEWARES */
