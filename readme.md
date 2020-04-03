@@ -2,7 +2,7 @@
 
 >Info tech blog posts application.
 
-![](/public/img/infoblog.gif)
+![Info Tech Blog](/public/img/infoblog.gif)
 
 
 ## Usage 
