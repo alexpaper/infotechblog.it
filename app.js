@@ -12,7 +12,6 @@ const cookieParser = require('cookie-parser');
 // AUTHENTICATION 
 const User = require('./models/user');
 const session = require('express-session');
-const RememberMeStrategy = require('passport-remember-me');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const passportLocalMongoose = require('passport-local-mongoose');
@@ -37,7 +36,7 @@ app.use(xssClean());
 app.use(hpp());
 const limiter = expressRateLimit({
   windowMs: 10 * 60 * 1000, // 10 mins
-  max: 100 // 100 requests for 10 mins
+  max: 10000 // 100 requests for 10 mins
 });
 app.use(limiter);
 //Cors
@@ -71,12 +70,9 @@ passport.deserializeUser(function (id, done) {
   });
 });
 
-app.use((req, res, next) => {
-     // console.log('req.session', req.session);
-  return next();
-});
 // Passport Create req.user
 app.use(function (req, res, next) {
+  // console.log('req.session', req.session);
   res.locals.user = req.user;
   res.locals.session = req.session;
   // console.log(req.user);

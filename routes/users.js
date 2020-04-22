@@ -183,9 +183,15 @@ router.get('/logout', (req, res) => {
 //************************* FETCH LOGGEIN USER */
 router.get('/whoisloggedin', isLogged, (req, res) => {
     
-        return  res.status(200).json({ isAuthenticated: true, data: req.user });
+        if(!req.isAuthenticated()){
+    return res.status(200).json({success: true, data: req.user})
+   }else{
+    return res.status(400).json({success: false, data: req.user})
+   }
     
 });
+
+
 
 // Export
 module.exports = router;
