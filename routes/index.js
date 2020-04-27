@@ -433,9 +433,11 @@ router.post('/uploads', isLogged, async(req, res) => {
     await upload(req, res, (err) => {
         let url = '';
         if (req.file !== undefined) {
-            url = `http://46.101.168.84/uploads/${req.file.filename}`;
+            // url = `http://46.101.168.84/uploads/${req.file.filename}`;
+            url = `/uploads/${req.file.filename}`;
         } else {
-            url = 'http://46.101.168.84/uploads/not-found.jpg';
+            url = '/uploads/not-found.jpg';
+            // url = 'http://46.101.168.84/uploads/not-found.jpg';
         };
 
         if (err) {
