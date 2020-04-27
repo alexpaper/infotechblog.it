@@ -168,7 +168,7 @@ router.post('/searchinfo', async(req, res) => {
                     _id: '0101010101010101010101',
                     user: { fname: '@lex' },
                     title: 'Not Found',
-                    text: '<p>Not found...</p><figure class="image"><img src=" http://46.101.168.84/uploads/upload-1583491121972.jpg" alt="oki"></figure>',
+                    text: '<p>Not found...</p><figure class="image"><img src=`${process.env.SERVER}/uploads/upload-1583491121972.jpg` alt="oki"></figure>',
                     importance: 'low',
                     createdAt: '1313-13-13T13:13:13.130+00:00'
                 }],
@@ -185,7 +185,7 @@ router.post('/searchinfo', async(req, res) => {
                 _id: '0101010101010101010101',
                 user: { fname: '@lex' },
                 title: 'Not Found',
-                text: '<p>Not found...</p><figure class="image"><img src=" http://46.101.168.84/uploads/upload-1583491121972.jpg" alt="oki"></figure>',
+                text: '<p>Not found...</p><figure class="image"><img src=`${process.env.SERVER}/uploads/upload-1583491121972.jpg` alt="oki"></figure>',
                 importance: 'low',
                 createdAt: '1313-13-13T13:13:13.130+00:00'
             }],
@@ -433,11 +433,9 @@ router.post('/uploads', isLogged, async(req, res) => {
     await upload(req, res, (err) => {
         let url = '';
         if (req.file !== undefined) {
-            // url = `http://46.101.168.84/uploads/${req.file.filename}`;
-            url = `/uploads/${req.file.filename}`;
+            url = `${process.env.SERVER}/uploads/${req.file.filename}`;
         } else {
-            url = '/uploads/not-found.jpg';
-            // url = 'http://46.101.168.84/uploads/not-found.jpg';
+            url = `${process.env.SERVER}/uploads/not-found.jpg`;
         };
 
         if (err) {
