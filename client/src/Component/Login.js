@@ -154,7 +154,7 @@ function Login(props) {
             </div>
             <div className="info-modal-submit">
               <button type="submit" className="info-btn-modal-submit">
-                Insert
+                Submit
                 </button>
             </div>
           </form>
