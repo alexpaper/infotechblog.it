@@ -124,7 +124,7 @@ function Signup(props) {
             : "info-modal-window info-modal-window-show"
         }
       >
-        <div className="info-modal-windows-up">
+        <div className="info-modal-windows-up-signup">
           <button onClick={() => openModalSignUp()} className="info-modal-close">
             X
           </button>
