@@ -4,6 +4,8 @@ import styles from "../styles/styles";
 import { GlobalContext } from "../Context/GlobalState";
 import { GlobalUsersContext } from "../Context/GlobalUsersMessage";
 import Nav from './Nav';
+import Enter from './enter.svg';
+import Info from './Info.svg';
 
 //**** FUNCTION */
 function Header(props) {
@@ -30,7 +32,7 @@ function Header(props) {
     setSearch("");
   };
 
-  //*** HIDE HEADE ON SCROLL  DOWN  */
+  //*** HIDE HEADER ON SCROLL  DOWN  */
   let lastScrollTop = 0;
   let headerToHide = React.useRef();
   // console.log(headerToHide.current)
@@ -39,7 +41,7 @@ function Header(props) {
 
   window.addEventListener('scroll', function () {
     // console.log(window.pageYOffset)
-    var currentScrollPos = window.pageYOffset;
+    let currentScrollPos = window.pageYOffset;
     if (prevScrollpos > currentScrollPos) {
       // headerToHide.current.classList.remove('d-none')
       headerToHide.current.style.opacity = 1;
@@ -88,30 +90,25 @@ function Header(props) {
                 />
                 <label htmlFor="switch-1" className="switchLabel"></label>
               </div>
-
-              <h1 className={!open ? "info-title" : "info-title dark-color"}>
-                {" "}
+              <div className="info-title-div">
+                <img src={Info} className='info-img' alt="info"/>
+                <h1 className={!open ? "info-title" : "info-title dark-color"}>
                 Info Tech Blog.it
               </h1>
-              <div className="info-subtitle">
-
-                <div>{contextUsers.state.user._id !== 0 && contextUsers.state.user.fname !== undefined ?
-                  `Ciao ${contextUsers.state.user.fname}`
-                  :
-                  'Usefull information about tech. Stay informed 🤓!'}
-                  </div>
               </div>
-
             </div>
           </header>
-
           <div className="info-search">
             <div className="info-home">
               <a href="/">
                 <img src="img/casa.svg" className="btn-home" alt="home" />
               </a>
             </div>
-            <form className="search-form" onSubmit={onSearchSubmit}>
+            <form 
+            className="search-form"
+             onSubmit={onSearchSubmit}
+             autoComplete='off'
+             >
               <input
                 type="text"
                 name="search"
@@ -122,11 +119,13 @@ function Header(props) {
                 placeholder="Search"
               />
 
-              <input
+              <button
                 type="submit"
                 id="search-submit"
                 className="search-submit"
-              />
+              >
+                <img className='btn-enter' src={Enter} alt="enter"/>
+              </button>
             </form>
           </div>
           <div>{contextUsers.state.user._id !== 0 && contextUsers.state.user.fname !== undefined ?
@@ -135,9 +134,15 @@ function Header(props) {
                 
                   :
                   '📖'}
-                  </div>
+            </div>
          
-
+            <div className="info-subtitle">
+                <div>{contextUsers.state.user._id !== 0 && contextUsers.state.user.fname !== undefined ?
+                  `Ciao ${contextUsers.state.user.fname}`
+                  :
+                  'Usefull Tech information. Errors are friends! Stay informed 🤓!'}
+                  </div>
+              </div>
           <div className={contextUsers.state.msg.length === 0 ? "info-msg" : "info-msg bck"}>{typeof contextUsers.state.msg != "undefined" ? contextUsers.state.msg : ""}</div>
         </div>
       </div>

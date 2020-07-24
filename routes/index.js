@@ -133,7 +133,7 @@ router.get("/v1/api", async(req, res) => {
 //***************** SEARCH POST ROUTE */
 router.post('/searchinfo', async(req, res) => {
     // console.log(req.body.search)
-    let search = req.body.search;
+    let search = req.body.search.toLowerCase();
     let myQuery = Post.find({}).populate('user');
     myQuery.sort('-createdAt');
     // Await response
@@ -144,11 +144,17 @@ router.post('/searchinfo', async(req, res) => {
     if (search !== undefined && search.length > 0) {
 
         let match = found.filter(value => {
-            let rgx = new RegExp(`^${search}`, 'gi');
+            // let rgx = new RegExp(`^${search}`, 'gi');
             // console.log(value.slug)
             if (value.slug && value.text !== undefined) {
-                // console.log(value.slug)
-                return value.slug.match(rgx) || value.text.match(rgx);
+
+                if (value.slug.indexOf(search) > -1 || value.text.indexOf(search) > -1) {
+                    // console.log(`Title = ${value.slug.indexOf(search)}`)
+                    // console.log(`Text = ${value.text.indexOf(search)}`)
+                    // console.log(value.slug)
+                    // console.log(value.text)
+                    return value.slug || value.text
+                }
             }
         });
 
