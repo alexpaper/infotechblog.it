@@ -1,7 +1,6 @@
 //*** Requirment
 const dotenv = require("dotenv").config();
 const express = require("express");
-const bodyParser = require("body-parser");
 const colors = require("colors");
 const cat = require('cat-me');
 const path = require("path");
@@ -40,15 +39,15 @@ app.use(cors());
 app.use(cookieParser());
 
 //*** MIDDLEWARES */
-app.use(bodyParser.urlencoded({
+app.use(express.urlencoded({
     extended: false
 }));
-app.use(bodyParser.json());
+app.use(express.json());
 
 // Static
 app.use(express.static(path.join(__dirname, "public")));
 // React front end
-app.use(express.static(path.join(__dirname, 'reactApp/build1')));
+app.use(express.static(path.join(__dirname, 'reactApp/build')));
 
 //Route
 

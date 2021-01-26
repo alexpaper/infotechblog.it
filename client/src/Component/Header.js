@@ -6,6 +6,10 @@ import { GlobalUsersContext } from "../Context/GlobalUsersMessage";
 import Nav from './Nav';
 import Enter from './enter.svg';
 import Info from './Info.svg';
+import Home from './home.svg';
+import Login from './login.svg';
+import Plus from './plus.svg';
+
 
 //**** FUNCTION */
 function Header(props) {
@@ -13,6 +17,7 @@ function Header(props) {
 
   const [open, setOpen] = React.useState(false);
   const [searchInput, setSearch] = React.useState("");
+  const [isDarkLocal, setIsDarkLocal] = React.useState(false);
 
   // Import CONTEXT
   const context = React.useContext(GlobalContext);
@@ -32,8 +37,15 @@ function Header(props) {
     setSearch("");
   };
 
+  // USE EFFECT
+  React.useEffect(()=>{
+    if(context.isDark){
+      setIsDarkLocal(true);
+    }
+  },[context])
+
   //*** HIDE HEADER ON SCROLL  DOWN  */
-  let lastScrollTop = 0;
+  // let lastScrollTop = 0;
   let headerToHide = React.useRef();
   // console.log(headerToHide.current)
   // Add event listener
@@ -60,8 +72,11 @@ function Header(props) {
     prevScrollpos = currentScrollPos;
   });
 
-  //**** Styles
-  // const { classes } = props;
+  //**** HANDLE DARK MODE
+  const handleDarkMode = ()=>{
+    setIsDarkLocal(!isDarkLocal);
+    context.darkMode()
+  };
 
   //******************************************** RETURN */
   return (
@@ -85,7 +100,8 @@ function Header(props) {
                 <input
                   id="switch-1"
                   type="checkbox"
-                  onClick={context.darkMode}
+                  checked={isDarkLocal}
+                  onChange={handleDarkMode}
                   className="switchInput"
                 />
                 <label htmlFor="switch-1" className="switchLabel"></label>
@@ -101,7 +117,7 @@ function Header(props) {
           <div className="info-search">
             <div className="info-home">
               <a href="/">
-                <img src="img/casa.svg" className="btn-home" alt="home" />
+                <img src={Home} className="btn-home" alt="home" />
               </a>
             </div>
             <form 
@@ -128,19 +144,19 @@ function Header(props) {
               </button>
             </form>
           </div>
-          <div>{contextUsers.state.user._id !== 0 && contextUsers.state.user.fname !== undefined ?
+          <div className='info-add-post'>{contextUsers.state.user._id !== 0 && contextUsers.state.user.fname !== undefined ?
                   
-                 <span onClick={openModalFunc} className="info-btn-add" role='img' aria-label>➕</span>
+                 <span onClick={openModalFunc} className="info-btn-add" role='img'><img className='info-login'  src={Plus} alt="enter"/></span>
                 
                   :
-                  '📖'}
+                  <img className='info-login' onClick={()=>openModalLogin()} src={Login} alt="enter"/>}
             </div>
          
             <div className="info-subtitle">
                 <div>{contextUsers.state.user._id !== 0 && contextUsers.state.user.fname !== undefined ?
                   `Ciao ${contextUsers.state.user.fname}`
                   :
-                  'Usefull Tech information. Errors are friends! Stay informed 🤓!'}
+                  'Tech info. Errors are our friends! Stay informed!'}
                   </div>
               </div>
           <div className={contextUsers.state.msg.length === 0 ? "info-msg" : "info-msg bck"}>{typeof contextUsers.state.msg != "undefined" ? contextUsers.state.msg : ""}</div>

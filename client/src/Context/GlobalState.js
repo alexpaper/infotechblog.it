@@ -1,5 +1,4 @@
-// https://www.youtube.com/watch?v=imjfiXxvMD8
-// https://www.youtube.com/watch?v=snzS7-73SEQ
+
 import React, { createContext, useReducer } from "react";
 import Reducer from "./Reducer";
 import axios from "axios";
@@ -17,6 +16,19 @@ export const GlobalProvider = ({ children }) => {
   // IMPPORT GLOBAL USERS MESSAGE SISTEM
   const contextUsers = React.useContext(GlobalUsersContext);
 
+  // CHECK DARK THEME INITIAL STATE
+const darkInitialState = ()=>{
+  const darkModeLocalStorage = localStorage.getItem('isDark') ? JSON.parse(localStorage.getItem('isDark')) : {isDark: false};
+if(darkModeLocalStorage.isDark){
+  document.body.setAttribute('data-theme', 'dark');
+  setDark(true);
+}else{
+  document.body.removeAttribute('data-theme');
+  setDark(false);
+}
+}
+
+
   //******************* SET INITIAL STATE GLOBAL OBJECT VARIABLE */
   //**** THIS IS THE INITIAL STATE AFTHER DISPACH BECOME THE useReducer 'STATE' */
   let initialState = {
@@ -24,17 +36,19 @@ export const GlobalProvider = ({ children }) => {
     fetchError: "",
     next: {},
     prev: {},
-    posts: []
+    posts: [],
+    isDark
   };
 
-  //************************* AXIOS GET FETCH POSTS */
-  async function fetchData(page, limit) {
+// FETCH DATA USE CALLBACK TO AVOID ERRORS
+const fetchData = React.useCallback(async (page, limit) =>{
+ 
     // let cl = console.log;
     let pageNumb = page || 1;
     let limitNumb = limit || 4;
     // cl(pageNumb)
     // cl(limitNumb)
-
+  
     let url = `/v1/api?page=${pageNumb}&limit=${limitNumb}`;
     // cl(url)
     await axios
@@ -52,7 +66,7 @@ export const GlobalProvider = ({ children }) => {
           // console.log(error.response.headers);
           // console.log(error.config);
           contextUsers.flashMessage(error.response.data.message);
-
+  
         } else if (error.request) {
           // The request was made but no response was received
           // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
@@ -62,12 +76,12 @@ export const GlobalProvider = ({ children }) => {
           // Something happened in setting up the request that triggered an Error
           // console.log('Error', error.message);
         }
-
+  
         // return console.log(error.response.data);
         dispatch({ type: "FETCH_ERROR" });
-
+  
       });
-  }
+},[contextUsers]);
 
   //**************** AXIOS SEARCH POSTS POST  */
   async function searchPostsDB(searchKey) {
@@ -199,8 +213,10 @@ export const GlobalProvider = ({ children }) => {
   // USEEFFECT TO FETCH THE DATA
   React.useEffect(() => {
     // FETCH POSTS ONE TIME
-    fetchData();
-  }, []);
+    fetchData()
+    // Check darkmode initial state
+    darkInitialState()
+  }, [fetchData]);
 
   //********** DELETE ACTIONS TO MAKE CALLs TO THE REDUCER */
   function deletePost(id) {
@@ -227,10 +243,19 @@ export const GlobalProvider = ({ children }) => {
     searchPostsDB(searchKey);
     // Fetch
     // fetchData();
-  }
+  };
+
   //*** */ Dark Mode
   const darkMode = () => {
-    setDark(!isDark);
+    if(!isDark){
+      setDark(!isDark);
+      document.body.setAttribute('data-theme', 'dark');
+      localStorage.setItem('isDark', JSON.stringify({isDark:true}));
+    }else{
+      setDark(!isDark);
+      document.body.removeAttribute('data-theme');
+      localStorage.setItem('isDark', JSON.stringify({isDark:false}));
+    }
   };
 
   // ******** RETURN

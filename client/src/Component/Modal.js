@@ -6,7 +6,7 @@ import { GlobalContext } from "../Context/GlobalState";
 
 export default function Modal(props) {
   const context = React.useContext(GlobalContext);
-  const APIURL = "http://localhost:3001";
+  // const APIURL = "http://localhost:3001";
   // Deconstruct
   const { openModal, openModalFunc } = props;
   // Set State

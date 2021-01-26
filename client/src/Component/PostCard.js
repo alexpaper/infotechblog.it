@@ -4,6 +4,8 @@ import InlineEditor from "@ckeditor/ckeditor5-build-inline";
 //*********** IMPORT THE GLOBAL STATE */
 import { GlobalContext } from "../Context/GlobalState";
 import { GlobalUsersContext } from '../Context/GlobalUsersMessage';
+import Edit from './edit.svg';
+import Trash from './trash.svg';
 
 export default function PostCard(props) {
   //*********** CONTEXT */
@@ -15,7 +17,7 @@ export default function PostCard(props) {
   const [showDeleteBtn, setShowDeleteBtn] = React.useState(false);
   const [edit, setEdit] = React.useState(false);
   const [dataUpdate, setDataUpdate] = React.useState();
-  const APIURL = "http://localhost:3001";
+  // const APIURL = "http://localhost:3001";
   // Useeffect
   React.useEffect(() => {
 
@@ -99,9 +101,9 @@ export default function PostCard(props) {
                 <div className={`confirm-del info-btn-del-${id}`}>
                   <button
                     onClick={() => context.deletePost(`${id}`)}
-                    className="btn-del"
+                    className="btn-confirm-del"
                   >
-                    Confirm
+                    CONFIRM
               </button>
                 </div>
               ) : (
@@ -111,7 +113,7 @@ export default function PostCard(props) {
                       <button
                         onClick={() => toggleDeleteDiv(`${id}`)}
                         className={`btn-del btn-del-btn-${id}`}
-                      > Delete</button>
+                      > <img className='img-trash' src={Trash} alt="trash"/></button>
                       :
                       null
                     }
@@ -122,7 +124,7 @@ export default function PostCard(props) {
                 <div className="info-edit">
                   <button onClick={() => toggleEdit(`${id}`)}
                     className="edit-btn">
-                    Edit
+                   <img className='img-edit' src={Edit} alt="edit"/>
             </button>
                   {edit ? (
                     <button

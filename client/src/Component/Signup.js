@@ -108,11 +108,9 @@ function Signup(props) {
       if (item.email !== undefined) { return item.email }
       if (item.password !== undefined) { return item.password }
       if (item.role !== undefined) { return item.role }
-      if(item.secret !== undefined) {return item.secret}
-    }
-    );
+      if (item.secret !== undefined) {return item.secret}
+    });
   }
-
 
   //************************ RETURN */
   return (

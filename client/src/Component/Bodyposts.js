@@ -82,9 +82,10 @@ function Bodyposts() {
 
       <div className="made-with-love">
 
-        Made with big
-  <i className='i-love'> ♥ </i> by
-  <a className='a-love' target="_blank" rel="noopener noreferrer" href="mailto:alessandro.carta@gmail.com"> @alex Paper</a>
+        Made with
+  <i className='footer-icon-love'> ♥ </i> by
+  <a className='footer-anchor-love' target="_blank" rel="noopener noreferrer" href="mailto:alessandro.carta@gmail.com"> @lexPaper</a>
+   <a className='footer-anchor-sitowebveloce' rel="noopener noreferrer" href="https://sitowebveloce.it" target='_blank'>sitowebveloce.it</a>
       </div>
 
     </>
