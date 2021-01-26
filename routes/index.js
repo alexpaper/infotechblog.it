@@ -46,8 +46,15 @@ const upload = multer({
 
 //*** HOME REACT */
 router.get("/", (req, res) => {
+    
+    // React front end
+if(process.env.NODE_ENVIRONMENT === 'production'){
     // Response with the dir path and the name of the file html 
-    res.sendFile(path.join(__dirname, '../reactApp/build1', 'index.html'));
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+}else {
+    res.status(200).json({message:'API Info Teck Blog super fast...🏃💨'});
+}
+    
 });
 
 //************* GET ROUTE INDEX HOME */

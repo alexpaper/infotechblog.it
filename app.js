@@ -44,18 +44,21 @@ app.use(express.urlencoded({
 }));
 app.use(express.json());
 
-// Static
+// STATIC
 app.use(express.static(path.join(__dirname, "public")));
-// React front end
-app.use(express.static(path.join(__dirname, 'reactApp/build')));
 
-//Route
-
+// ROUTES
 let index = require("./routes/index");
 let users = require('./routes/users');
 
 app.use('/user', users);
 app.use("/", index);
+
+// React front end
+if(process.env.NODE_ENVIRONMENT === 'production'){
+    app.use(express.static(path.join(__dirname, 'client/build')));
+}
+
 
 // 404
 // catch 404 and forward to error handler
@@ -68,9 +71,8 @@ app.use(function(req, res, next) {
 
 //*** PORT
 let PORT = process.env.PORT;
-
 // Listener
 const server = app.listen(PORT, () => {
     console.log(`${cat()}`);
-    console.log(`Server running on port ${PORT}`.blue);
+    console.log(`Server running 🏃💨 in ${process.env.NODE_ENVIRONMENT} environment on port ${PORT}`.blue);
 });

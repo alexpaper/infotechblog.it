@@ -1,7 +1,5 @@
 node_modules
 .env
-client/build
 client/node_modules
-public/img
 package-lock.json
 client/package-lock.json
