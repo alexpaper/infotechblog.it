@@ -104,8 +104,11 @@ function Header(props) {
                   onChange={handleDarkMode}
                   className="switchInput"
                 />
-                <label htmlFor="switch-1" className="switchLabel"></label>
+                <label htmlFor="switch-1" className="switchLabel"> </label>
+                <div className='sun-moon'>{isDarkLocal ? '☀️' : '🌘'}</div>
               </div>
+              
+              
               <div className="info-title-div">
                 <img src={Info} className='info-img' alt="info"/>
                 <h1 className={!open ? "info-title" : "info-title dark-color"}>
