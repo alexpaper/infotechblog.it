@@ -78,7 +78,7 @@ export default function Modal(props) {
                   required
                   onChange={(event, editor) => {
                     const data = editor.getData();
-                    // console.log({ event, editor, data });
+                    console.log({ event, editor, data });
                     // Set state
                     setText(data);
 

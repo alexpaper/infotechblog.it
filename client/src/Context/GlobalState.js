@@ -140,16 +140,14 @@ const fetchData = React.useCallback(async (page, limit) =>{
   }
   //*********************** AXIOS UPDATE POST */
   async function updatePostDB(id, updatePost) {
-    let url = "/updatepost";
-    let update = { id: id, updatePost: updatePost };
-    await axios
-      .post(url, update)
-      .then(response => {
-        // console.log(response);
-        fetchData();
-        contextUsers.flashMessage(response.data.message)
-      })
-      .catch(error => {
+    try{
+      let url = "/updatepost";
+      let update = { id: id, updatePost: updatePost };
+      let response = await axios.post(url, update);
+      // console.log(response);
+      fetchData();
+      contextUsers.flashMessage(response.data.message)
+    }catch(error) {
         if (error.response) {
           // The request was made and the server responded with a status code
           // that falls out of the range of 2xx
@@ -170,7 +168,7 @@ const fetchData = React.useCallback(async (page, limit) =>{
           // console.log('Error', error.message);
         }
         // return console.log(error.response.data);
-      });
+      };
   }
 
   //************************ AXIOS POST DELETE POST */

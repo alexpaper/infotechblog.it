@@ -39,12 +39,17 @@ export default function PostCard(props) {
   };
 
   //********** UPDATE POST */
-  const submitUpdate = (id, dataUpdate) => {
-    // console.log(id);
-    // console.log(dataUpdate);
-    // Update DB
-    context.updatePost(id, dataUpdate);
+  const submitUpdate =  (id, dataUpdate, text) => {
+  
+    //  console.log(id, dataUpdate, text);
+   if(dataUpdate === undefined){
     setEdit(!edit);
+     return
+    };
+   // Update DB
+   context.updatePost(id, {dataUpdate});
+   setEdit(!edit);
+
   };
 
   // Return
@@ -128,7 +133,7 @@ export default function PostCard(props) {
             </button>
                   {edit ? (
                     <button
-                      onClick={() => submitUpdate(`${id}`, { dataUpdate })}
+                      onClick={() => submitUpdate(`${id}`, dataUpdate, text)}
                       className="edit-btn-update"
                     >
                       Update
